@@ -129,7 +129,8 @@ def default(output, schema, prefix, stand_alone, expanded, kubernetes, strict):
     for title in components:
         kind = title.split(".")[-1].lower()
         if kubernetes:
-            group = title.split(".")[-3].lower()
+            segments = title.split(".")
+            group = ".".join(segments[:-2]).lower()
             api_version = title.split(".")[-2].lower()
         specification = components[title]
         specification["$schema"] = "http://json-schema.org/schema#"
